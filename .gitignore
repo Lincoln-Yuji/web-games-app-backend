@@ -1,2 +1,9 @@
 # Ignore PYCAHCHE
 __pycache__/
+
+# Ignore Local Database changes (no important data should be here anyways)
+*.db
+instance/.*db
+
+# Ignore all the Flask's app instance files (Windows Environment)
+instance/
