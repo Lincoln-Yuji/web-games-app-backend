@@ -6,8 +6,14 @@ from flask_cors import CORS
 app = Flask(__name__, static_folder="./frontend", static_url_path="/")
 CORS(app)
 
-# Set the location of the database creation and its name
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///mydatabase.db"
+# Connect to the Python Anywhere MySQL data base
+_USER = "lincolnyuji"
+_PASS = "root1234"
+_HOST = "lincolnyuji.mysql.pythonanywhere-services.com"
+_BASE = "lincolnyuji$webgames"
+
+# app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+mysqlconnector://root:root@localhost/webgames"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+mysqlconnector://{}:{}@{}/{}".format(_USER, _PASS, _HOST, _BASE)
 app.config["SQLALCHEMY_TRACK_MODIFIATIONS"] = False
 
 db = SQLAlchemy(app)

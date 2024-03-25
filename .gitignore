@@ -1,3 +1,2 @@
-# Ignore local data base changes (for Windows too)
-*.db
-instance/*.db
+# Ignore PYCACHE
+__pycache__/

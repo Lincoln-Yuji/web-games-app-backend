@@ -70,7 +70,7 @@ def delete_contact(user_id):
 
 # Local test
 if __name__ == "__main__":
-    # Start the Data Base if it's not already created
+    # Create all tables (CREATE IF NOT EXISTS)
     with app.app_context():
         db.create_all()
 
