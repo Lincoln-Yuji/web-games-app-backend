@@ -1,0 +1,3 @@
+# Ignore local data base changes (for Windows too)
+*.db
+instance/*.db
