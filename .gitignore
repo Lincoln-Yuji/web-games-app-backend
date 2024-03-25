@@ -1,6 +1,3 @@
-# Ignore PYCAHCHE
-__pycache__/
-
 # Ignore Local Database changes (no important data should be here anyways)
 *.db
 instance/.*db
