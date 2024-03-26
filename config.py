@@ -6,13 +6,19 @@ from flask_cors import CORS
 app = Flask(__name__, static_folder="./frontend", static_url_path="/")
 CORS(app)
 
-# Connect to the Python Anywhere MySQL data base
-_USER = "lincolnyuji"
-_PASS = "root1234"
-_HOST = "lincolnyuji.mysql.pythonanywhere-services.com"
-_BASE = "lincolnyuji$webgames"
+# The data base configuration SHOULD NOT be inside the development project.
+# We need to get the connection information from outside.
+import sys
 
-# app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+mysqlconnector://root:root@localhost/webgames"
+sys.path.append("../databaseconfig")
+from databaseconfig.db_config import db_info
+
+_USER = db_info["user"]
+_PASS = db_info["pass"]
+_HOST = db_info["host"]
+_BASE = db_info["base"]
+
+# Connect to the Python Anywhere MySQL data base
 app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+mysqlconnector://{}:{}@{}/{}".format(_USER, _PASS, _HOST, _BASE)
 app.config["SQLALCHEMY_TRACK_MODIFIATIONS"] = False
 
