@@ -1,6 +1,6 @@
 from flask import request, jsonify
 from config import app, db
-from models import Contact
+from models import Contact, Game
 
 @app.route('/')
 def main():
@@ -9,6 +9,24 @@ def main():
         db.create_all()
 
     return app.send_static_file('index.html')
+
+
+@app.route("/home_games", methods=["GET"])
+def get_all_games():
+    games = Game.query.all()
+    json_games = list(map(lambda x: x.to_json(), games))
+
+    return jsonify({"games": json_games})
+
+@app.route("/game/<int:game_id>", methods=["GET"])
+def get_game(game_id):
+    game = Game.query.get(game_id)
+
+    if not game:
+        return jsonify({"message": "Game not found"}), 404
+
+    return jsonify({"game": game.to_json()})
+
 
 @app.route("/contacts", methods=["GET"])
 def get_contacts():
