@@ -1,6 +1,7 @@
 from flask import request, jsonify
 from config import app, db
 from models import Contact, Game
+from sqlalchemy import func
 
 @app.route('/')
 def main():
@@ -26,6 +27,13 @@ def get_game(game_id):
         return jsonify({"message": "Game not found"}), 404
 
     return jsonify({"game": game.to_json()})
+
+@app.route("/search/<query>", methods=["GET"])
+def search_game(query):
+    games = Game.query.filter(Game.title.like('%' + query + '%'))
+    json_games = list(map(lambda x: x.to_json(), games))
+
+    return jsonify({"games": json_games})
 
 
 @app.route("/contacts", methods=["GET"])
