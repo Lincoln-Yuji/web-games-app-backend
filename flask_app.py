@@ -35,6 +35,11 @@ def search_game(query):
 
     return jsonify({"games": json_games})
 
+@app.route("/teaser/<src>", methods=["GET"])
+def get_img(src):
+    print("Sending: " + src)
+    return app.send_static_file(src)
+
 
 @app.route("/contacts", methods=["GET"])
 def get_contacts():
